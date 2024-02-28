@@ -3,14 +3,8 @@ const Event = require("../models/event");
 const User = require("../models/user");
 const config = require("../utils/config");
 const jwt = require("jsonwebtoken");
+const helpers = require("../utils/helpers");
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-  return null
-}
 
 eventRouter.get("/", async (req, res, next) => {
   const events = await Event.find({}).populate("createdBy").populate("registeredBy");
@@ -28,7 +22,7 @@ eventRouter.post("/create-event", async (req, res, next) => {
     location
   } = req.body;
 
-  const decodedToken = jwt.verify(getTokenFrom(req), config.SECRET_KEY);
+  const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
   const user = await User.findById(decodedToken.id);
 
   if(!user) {
