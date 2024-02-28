@@ -1,6 +1,16 @@
 const eventRouter = require("express").Router();
 const Event = require("../models/event");
 const User = require("../models/user");
+const config = require("../utils/config");
+const jwt = require("jsonwebtoken");
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
 
 eventRouter.get("/", async (req, res, next) => {
   const events = await Event.find({}).populate("createdBy").populate("registeredBy");
@@ -15,11 +25,17 @@ eventRouter.post("/create-event", async (req, res, next) => {
     endDate,
     startTime,
     endTime,
-    location,
-    createdById,
+    location
   } = req.body;
 
-  const user = await User.findById(createdById);
+  const decodedToken = jwt.verify(getTokenFrom(req), config.SECRET_KEY);
+  const user = await User.findById(decodedToken.id);
+
+  if(!user) {
+    return res.status(401).json({
+      error: 'token invalid'
+    })
+  }
 
   const event = new Event({
     title,
