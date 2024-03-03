@@ -7,6 +7,7 @@ const logoutRouter = require("express").Router();
 
 logoutRouter.post("/", async (req, res) => {
     const decodedToken = jwt.verify(getTokenFrom(req) , config.SECRET_KEY);
+    console.log(decodedToken);
     const user = await User.findById(decodedToken.id);
     if(!user) {
         return res.status(401).json({

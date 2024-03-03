@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+.events {
+  font-family: "Lato", sans-serif;
+  margin: 30px;
+}
+
+.header {
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+.input-container {
+  text-align: center;
+}
+
+.input-container input {
+  font-family: "Lato", sans-serif;
+  margin: 0 auto;
+  width: 350px;
+  border: none;
+  background-color: #f1efef;
+  border-radius: 22px;
+  display: block;
+  padding: 15px 18px;
+}
+
+.eventlist {
+  display: flex;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+  justify-content:left /* Distribute items evenly with space between them */
+}
+
+.eventlist > * {
+  margin: 0 10px;
+  flex-basis: 0 0 calc(30.33% - 10px); /* Set the width of each card */
+  margin-bottom: 20px; /* Add margin between cards */
+}
+
+@media (max-width: 1041px) {
+  .eventlist {
+    justify-content: center; /* Center items for smaller screens */
+  }
+
+  .eventlist > * {
+    flex: 0 0 calc(50% - 20px); /* Adjust width for smaller screens */
+  }
+}

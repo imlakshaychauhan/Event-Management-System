@@ -4,6 +4,7 @@ import Body from "./Body";
 import Signup from "./pages/Signup";
 import "./App.css"
 import Login from "./pages/Login";
+import Events from "./pages/Events";
 
 const AppRouter = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const AppRouter = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/events",
+        element: <Events />
       }
     ],
   },

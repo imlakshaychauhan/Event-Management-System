@@ -1,0 +1,17 @@
+.loadingcard {
+    background-color: #F1EFEF;
+    color: black;
+    cursor: pointer;
+    border: none;
+    width: 470px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 200px; /* Set height of container */
+}
+
+.loadingcard > p {
+    font-size: 30px;
+}

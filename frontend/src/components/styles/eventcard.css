@@ -1,0 +1,32 @@
+.event {
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 10px;
+    display: flex;
+    direction: row;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.right > img {
+    color: white;
+    width: 35px;
+    height: 35px;
+}
+
+
+.right {
+    justify-items: flex-end;
+    margin: 0 auto;
+    padding-left: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 120px;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 80px;
+}
