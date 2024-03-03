@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Judson:ital,wght@0,400;0,700;1,400&display=swap');
+
+.navbar {
+    font-family: "Judson", serif;
+    font-weight: 500;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid black; */
+    justify-content: space-between;
+    margin: 0 35px;
+}
+
+.navbar > h1 {
+    color: #0E3F09;
+    cursor: pointer;
+}
+
+.mid-navbar {
+    display: flex;
+    align-items: center;
+}
+
+ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+li {
+    margin: 0 25px;
+    color: #777777;
+}
+
+li:hover {
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.last-navbar {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 796px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar > h1 {
+        text-align: center;
+        color: #0E3F09;
+        cursor: pointer;    
+    }
+    
+    ul {
+        /* border: 1px solid red; */
+        padding: 0 5px;
+        align-items: center;
+        text-align: center;
+        list-style-type: none;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .last-navbar > button {
+        width: 100%;
+    }
+
+}

@@ -41,7 +41,6 @@ usersRouter.post("/register", async (req, res) => {
   });
 });
 
-
 usersRouter.get("/:username", async(req, res) => {
   const {username} = req.params;
   const user = await User.findOne({username});
