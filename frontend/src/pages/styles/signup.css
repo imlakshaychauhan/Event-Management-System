@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Judson:ital,wght@0,400;0,700;1,400&display=swap');
+
+.main-container {
+  font-family: "Judson", serif;
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
+}
+img {
+  width: 40vw;
+  height: 100vh;
+  margin: auto 0;
+  float: right;
+}
+
+.lower-heading {
+  text-align: center;
+  font-size: 30px;
+  color: #0E3F09;
+  font-weight: bolder;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 40%;
+  padding: 10px;
+  margin: 10px 5px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  font-family: "Judson", serif;
+  font-size: 15px;
+}
+
+.alternate {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  /* border: 1px solid red; */
+  width: fit-content;
+  margin-top: 5px;
+}
+
+.line {
+  width: 100px;
+  height: 1px; /* Adjust height as needed */
+  background-color: #ccc; /* Grey color */
+}
+
+.alternate > p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 100px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.square {
+  width: 60px; /* Adjust width as needed */
+  height: 60px; /* Same as width to create a square */
+  background-color: #D9D9D9; /* Grey color */
+  border-radius: 20px;
+}
+
+.alternative-paragraph {
+  text-align: center;
+}
+
+.first-sp {
+  color: #474747;
+}
+
+.second-sp {
+  color: #249329;
+  text-decoration: underline;
+  margin-left: 3px;
+}
+
+@media screen and (max-width: 930px) {
+  .image-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  input {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 473px) {
+  .options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;  
+    margin: 0;
+  }
+  .line {
+    display: none;
+  }
+}

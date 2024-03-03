@@ -12,7 +12,6 @@
 }
 
 .navbar > h1 {
-    color: #0E3F09;
     cursor: pointer;
 }
 
@@ -53,7 +52,6 @@ li:hover {
     }
     
     ul {
-        /* border: 1px solid red; */
         padding: 0 5px;
         align-items: center;
         text-align: center;
@@ -62,8 +60,9 @@ li:hover {
         width: 100%;
     }
     
-    .last-navbar > button {
+    .last-navbar {
         width: 100%;
+        justify-content: center;
     }
-
+    
 }
