@@ -1,8 +1,8 @@
 import "./styles/button.css";
 
-const Button = ({ title, backColor, color, type }) => {
+const Button = ({ title, backColor, color, type, onClick }) => {
     return (
-        <button type={type} className="button" style={{ backgroundColor: backColor, color: color }}>{title}</button>
+        <button onClick={onClick} type={type} className="button" style={{ backgroundColor: backColor, color: color }}>{title}</button>
     );
 };
 
