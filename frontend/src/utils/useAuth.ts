@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { loginUser } from "./userLogin";
+import { loginUser } from "../services/loginService";
 import { decodeToken } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLoggedInTrue, setIsLoggedInFalse, setLoginError } from "../utils/userSlice";
+import { setIsLoggedInTrue, setIsLoggedInFalse, setLoginError } from "./userSlice";
 
 const useAuth = () => {
 
@@ -32,12 +32,12 @@ const useAuth = () => {
       // Set up a timer to periodically check the token expiration
       const timer = setInterval(() => {
         checkTokenExpiration();
-      }, 10000); // Check every 10 seconds
+      }, 1000); // Check every second
 
       // Clean up the timer on component unmount
       return () => clearInterval(timer);
     }
-  }, [isLoggedIn]);
+  });
 
   const login = async (username, password) => {
     try {

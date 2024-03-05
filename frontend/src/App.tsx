@@ -10,6 +10,7 @@ import Homepage from "./pages/Homepage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Events from "./pages/Events";
+import Event from "./pages/Event";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import { useSelector } from "react-redux";
@@ -21,6 +22,7 @@ const AppRouter = createBrowserRouter(
       <Route path="/signup" element={<SignupOrNavigateToHomepage />} />
       <Route path="/login" element={<LoginOrNavigateToHomepage />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/event/:id" element={<Event />} />
     </Route>
   )
 );

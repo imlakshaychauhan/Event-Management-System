@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import "./styles/navbar.css";
-import useAuth from "../services/useAuth";
+import useAuth from "../utils/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoggedInFalse } from "../utils/userSlice";
 

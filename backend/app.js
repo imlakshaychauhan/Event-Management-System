@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const config = require("./utils/config")
-const usersRouter = require("./controllers/users")
+const config = require("./utils/config");
+const usersRouter = require("./controllers/users");
 const eventsRouter = require("./controllers/events");
 const { loginRouter } = require("./controllers/login");
 const logoutRouter = require("./controllers/logout");
@@ -19,7 +19,12 @@ mongoose
     console.log(err);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 app.use(express.json());
 app.use(middleware.requestLogger);
 

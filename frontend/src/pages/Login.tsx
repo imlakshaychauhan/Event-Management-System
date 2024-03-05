@@ -3,7 +3,7 @@ import img from "../assets/signup-page-image.jpg";
 import Button from "../components/Button";
 import "./styles/signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../services/useAuth";
+import useAuth from "../utils/useAuth";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginError, clearLoginError } from "../utils/userSlice";
 

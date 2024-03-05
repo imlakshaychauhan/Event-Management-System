@@ -6,14 +6,6 @@ const jwt = require("jsonwebtoken");
 const helpers = require("../utils/helpers");
 
 eventRouter.get("/", async (req, res, next) => {
-  // const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
-  // const user = await User.findById(decodedToken.id);
-  // if (!user) {
-  //   return res.status(401).json({
-  //     error: "Unauthorized access: User credentials not found!"
-  //   });
-  // }
-
   const events = await Event.find({});
   // .populate("createdBy")
   // .populate("registeredBy");
@@ -22,14 +14,6 @@ eventRouter.get("/", async (req, res, next) => {
 
 eventRouter.get("/:eventId", async (req, res) => {
   const { eventId } = req.params;
-
-  const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
-  const user = await User.findById(decodedToken.id);
-  if (!user) {
-    return res.status(401).json({
-      error: "Unauthorized access: User credentials not found!",
-    });
-  }
 
   const event = await Event.findById(eventId);
   if (!event) {
@@ -50,6 +34,8 @@ eventRouter.post("/create-event", async (req, res) => {
     startTime,
     endTime,
     location,
+    imgTheme,
+    eventImages
   } = req.body;
 
   const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
@@ -70,6 +56,8 @@ eventRouter.post("/create-event", async (req, res) => {
     endTime,
     location,
     createdBy: user.id,
+    imgTheme,
+    eventImages
   });
 
   const savedEvent = await event.save();

@@ -31,6 +31,13 @@
   justify-content:left /* Distribute items evenly with space between them */
 }
 
+.lines {
+  width: 100%;
+  margin: 0 auto;
+  height: 1.5px;
+  background-color: #ccc;
+}
+
 .eventlist > * {
   margin: 0 10px;
   flex-basis: 0 0 calc(30.33% - 10px); /* Set the width of each card */

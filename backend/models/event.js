@@ -1,5 +1,29 @@
 const mongoose = require("mongoose");
 
+const eventImageSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+});
+
+const locationSchema = new mongoose.Schema({
+  address: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
+});
+
 const eventSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -26,20 +50,25 @@ const eventSchema = new mongoose.Schema({
     required: true,
   },
   location: {
-    type: String,
+    type: locationSchema,
     required: true,
   },
   registeredBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the users who registered for the event
+      ref: "User",
     },
   ],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the user who created the event
+    ref: "User",
     required: true,
   },
+  imgTheme: {
+    type: String,
+    required: true,
+  },
+  eventImages: [eventImageSchema], // Define the eventImages field using the eventImageSchema
 });
 
 eventSchema.set("toJSON", {
