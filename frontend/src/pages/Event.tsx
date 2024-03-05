@@ -15,8 +15,7 @@ const Event = () => {
     const fetchData = async () => {
       try {
         const res = await getSingleEvent(id);
-        const data = res.data; // Removed unnecessary await
-        console.log(data);
+        const data = res.data;
         setEvent(data);
       } catch (error) {
         console.error("Error fetching event data:", error);
@@ -29,15 +28,17 @@ const Event = () => {
   if (event) {
     return (
       <div>
-        <Link to="/events">
-          <Button
-            title={"Back to Events"}
-            backColor={"#000000"}
-            color={"#FFFFFF"}
-            borderRadius={"8px"}
-          />
-        </Link>
-        <div className="main-container">
+        <div className="event-btn">
+          <Link to="/events">
+            <Button
+              title={"Back to Events"}
+              backColor={"#000000"}
+              color={"#FFFFFF"}
+              borderRadius={"8px"}
+            />
+          </Link>
+        </div>
+        <div className="m-container">
           <div className="left-div">
             <h1>{event.title}</h1>
             <p className="desc">{event.description}</p>
@@ -48,7 +49,13 @@ const Event = () => {
             </div>
           </div>
           <div className="right-div">
-            <Button title={"Attend"} backColor={"#55BF59"} color={"#FBF0F0"} />
+            <Link to={`/register-event/${event.id}`}>
+              <Button
+                title={"Attend"}
+                backColor={"#55BF59"}
+                color={"#FBF0F0"}
+              />
+            </Link>
             <div className="inner-right">
               <div className="date">
                 <img src={clock} alt="Clock Icon" />

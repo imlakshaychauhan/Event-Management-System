@@ -59,7 +59,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backCol={liveCol} />
+                  <EventCard title={event.title} backImg={event.imgTheme} />
                 </Link>
               );
             })
@@ -76,7 +76,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backCol={upcomingCol} />{" "}
+                  <EventCard title={event.title} backImg={event.imgTheme} />{" "}
                 </Link>
               );
             })
@@ -94,7 +94,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backCol={pastCol} />{" "}
+                  <EventCard title={event.title} backImg={event.imgTheme} />{" "}
                 </Link>
               );
             })

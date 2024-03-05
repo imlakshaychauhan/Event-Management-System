@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito&family=Judson:ital,wght@0,400;0,700;1,400&display=swap");
+
+.registerEvent button {
+  margin: 10px;
+}
+
+.card-container {
+  font-family: "Judson", serif;
+  display: flex;
+  margin: 10px;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
+}
+.card {
+  border: 1px solid #b9b9b9;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 850px;
+  padding: 20px;
+}
+
+.card h1 {
+    text-decoration: underline;
+}
+
+.left-side img {
+  height: 250px;
+  width: 450px;
+  border-radius: 10px;
+}
+
+.right-side {
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  justify-content: center;
+}
+
+.right-side button {
+  margin: 20px 0;
+}
+
+.rsvp-link {
+  text-decoration: underline;
+  color: #6a7acf;
+}
+
+@media screen and (max-width: 680px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding: 0px;
+    margin: 10px;
+  }
+
+  .left-side {
+    text-align: center;
+  }
+
+  .left-side img {
+    height: 150px;
+    width: 350px;
+    border-radius: 10px;
+  }
+  .right-side {
+    padding-left: 0px;
+  }
+}

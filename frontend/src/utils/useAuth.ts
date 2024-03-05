@@ -2,10 +2,14 @@ import { useEffect } from "react";
 import { loginUser } from "../services/loginService";
 import { decodeToken } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLoggedInTrue, setIsLoggedInFalse, setLoginError } from "./userSlice";
+import {
+  setIsLoggedInTrue,
+  setIsLoggedInFalse,
+  setLoginError,
+} from "./userSlice";
+import { registerUser } from "../services/userService";
 
 const useAuth = () => {
-
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
@@ -51,12 +55,24 @@ const useAuth = () => {
     }
   };
 
+  const signup = async (userData) => {
+    try {
+      const res = await registerUser(userData);
+      const token = res.data.token;
+      localStorage.setItem("token", token);
+      dispatch(setIsLoggedInTrue());
+    } catch (err) {
+      console.error("Signup failed:", err);
+      dispatch(setLoginError("Incorrect Credentials!")); // Set signup error message
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(setIsLoggedInFalse());
   };
 
-  return { login, logout };
+  return { login, logout, signup };
 };
 
 export default useAuth;
