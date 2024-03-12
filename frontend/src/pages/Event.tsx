@@ -10,6 +10,7 @@ import "./styles/event.css";
 const Event = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
+  const [currentStatus, setCurrentStatus] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +24,10 @@ const Event = () => {
     };
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    if (event) setCurrentStatus(!currentStatus);
+  }, [event]);
 
   // Conditional rendering
   if (event) {
@@ -49,13 +54,27 @@ const Event = () => {
             </div>
           </div>
           <div className="right-div">
-            <Link to={`/register-event/${event.id}`}>
-              <Button
-                title={"Attend"}
-                backColor={"#55BF59"}
-                color={"#FBF0F0"}
-              />
-            </Link>
+            {currentStatus ? (
+              <div className="attendance-div">
+                <p>You're Going!</p>
+                <Link to={`/register-event/${event.id}`}>
+                  <Button
+                    title={"Edit Attendance"}
+                    backColor={"#FF0000"}
+                    color={"#FFFFFF"}
+                  />
+                </Link>
+              </div>
+            ) : (
+              <Link to={`/register-event/${event.id}`}>
+                <Button
+                  title={"Attend"}
+                  backColor={"#55BF59"}
+                  color={"#FBF0F0"}
+                />
+              </Link>
+            )}
+
             <div className="inner-right">
               <div className="date">
                 <img src={clock} alt="Clock Icon" />

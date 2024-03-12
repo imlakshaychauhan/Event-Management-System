@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { decodeToken, formatDateRange } from "../utils/helpers";
-import { getSingleEvent, registerEvent } from "../services/eventService"; // Add this import
+import {
+  deregisterEvent,
+  getSingleEvent,
+  registerEvent,
+} from "../services/eventService"; // Add this import
 import "./styles/registerevent.css";
 
 const RegisterEvent = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
   const [showRSVP, setShowRSVP] = useState(true);
@@ -21,7 +26,7 @@ const RegisterEvent = () => {
         const data = res.data;
         if (!data.registeredBy.includes(decodedId)) {
           data.registeredBy.push(decodedId);
-          registerEvent(data.id, token);
+          await registerEvent(data.id, token);
         }
         setEvent(data);
         console.log(event);
@@ -32,9 +37,10 @@ const RegisterEvent = () => {
     fetchData();
   }, [id]);
 
-  const deRegisterEvent = () => {
-    
-  }
+  const deregister = async () => {
+    await deregisterEvent(event.id, token);
+    navigate("/");
+  };
 
   return (
     <div className="registerEvent">
@@ -73,10 +79,26 @@ const RegisterEvent = () => {
                 </span>
               ) : (
                 <>
-                  <span>Current Status: Going</span>
+                  <p className="status-p">
+                    {" "}
+                    <span style={{ fontWeight: "bold" }}>
+                      Current Status:
+                    </span>{" "}
+                    Going
+                  </p>
                   <div>
-                    <Button title={"Update to Not Going"} onClick={deRegisterEvent} />
-                    <span onClick={() => setShowRSVP(!showRSVP)}>Cancel</span>
+                    <Button
+                      title={"Update to Not Going"}
+                      onClick={deregister}
+                      backColor={"#000000"}
+                      color={"#FFFFFF"}
+                    />
+                    <span
+                      className="cancel-btn"
+                      onClick={() => setShowRSVP(!showRSVP)}
+                    >
+                      Cancel
+                    </span>
                   </div>
                 </>
               )}

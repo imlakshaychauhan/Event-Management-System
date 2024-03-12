@@ -70,3 +70,18 @@
     padding-left: 0px;
   }
 }
+
+.status-p {
+  font-size: 20px;
+}
+
+.rsvp-link {
+  cursor: pointer;
+}
+
+.cancel-btn {
+  color: #FF0000;
+  text-decoration: underline;
+  margin-left: 10px;
+  cursor: pointer;
+}

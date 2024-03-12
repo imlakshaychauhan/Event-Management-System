@@ -35,7 +35,7 @@ eventRouter.post("/create-event", async (req, res) => {
     endTime,
     location,
     imgTheme,
-    eventImages
+    eventImages,
   } = req.body;
 
   const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
@@ -57,7 +57,7 @@ eventRouter.post("/create-event", async (req, res) => {
     location,
     createdBy: user.id,
     imgTheme,
-    eventImages
+    eventImages,
   });
 
   const savedEvent = await event.save();
@@ -79,23 +79,61 @@ eventRouter.post("/register-event", async (req, res) => {
       error: "invalid user credentials",
     });
   }
-  
+
   const event = await Event.findById(eventId);
-  if(!event) {
+  if (!event) {
     return res.status(404).json({
       error: "Event not found",
     });
   }
-try {
+  try {
+    event.registeredBy = event.registeredBy.concat(decodedToken.id);
+    await event.save();
 
-  event.registeredBy = event.registeredBy.concat(decodedToken.id);
-  await event.save();
-  
-  user.eventsRegisteredTo = user.eventsRegisteredTo.concat(eventId);
-  await user.save();
-}catch(err) {
-  console.log(err);
-}
+    user.eventsRegisteredTo = user.eventsRegisteredTo.concat(eventId);
+    await user.save();
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(201).json(event);
+});
+
+eventRouter.post("/deregister-event", async (req, res) => {
+  // event with "eventId" is being registered by the user with the "userId".
+  const { eventId } = req.body;
+
+  const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
+  const user = await User.findById(decodedToken.id);
+  if (!user) {
+    return res.status(401).json({
+      error: "invalid user credentials",
+    });
+  }
+
+  const event = await Event.findById(eventId);
+  if (!event) {
+    return res.status(404).json({
+      error: "Event not found",
+    });
+  }
+  try {
+    event.registeredBy = event.registeredBy.filter(
+      (id) => id.toString() !== decodedToken.id
+    );
+      await event.save();
+      
+      console.log();
+    user.eventsRegisteredTo = user.eventsRegisteredTo.filter(
+      (id) => id.toString() !== eventId
+    );
+    await user.save();
+  } catch (error) {
+    console.error("Error deregistering event:", error);
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
 
   res.status(201).json(event);
 });
@@ -104,18 +142,20 @@ eventRouter.put("/:eventId", async (req, res) => {
   const { eventId } = req.params;
   const dataToUpdate = req.body;
   try {
-
     const event = await Event.findById(eventId);
 
     // Only the user who created this event can modify the event.
-    const user = await User.find({_id: event.createdBy});
-    const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
-        
+    const user = await User.find({ _id: event.createdBy });
+    const decodedToken = jwt.verify(
+      helpers.getTokenFrom(req),
+      config.SECRET_KEY
+    );
+
     // Check if the authenticated user is same as the one whoc created this event.
-    if(user[0]._id.toString() !== decodedToken.id) {
+    if (user[0]._id.toString() !== decodedToken.id) {
       return res.status(401).json({
-        error: "Unauthorized access: User credentials not found!"
-      })
+        error: "Unauthorized access: User credentials not found!",
+      });
     }
 
     const updatedEvent = await Event.findByIdAndUpdate(eventId, dataToUpdate, {
@@ -150,22 +190,25 @@ eventRouter.delete("/:eventId", async (req, res) => {
     }
 
     // Only the user who created this event can delete.
-    const user = await User.find({_id: event.createdBy});
-    const decodedToken = jwt.verify(helpers.getTokenFrom(req), config.SECRET_KEY);
-    
+    const user = await User.find({ _id: event.createdBy });
+    const decodedToken = jwt.verify(
+      helpers.getTokenFrom(req),
+      config.SECRET_KEY
+    );
+
     // Check if the authenticated user is same as the one whoc created this event.
-    if(user[0]._id.toString() !== decodedToken.id) {
+    if (user[0]._id.toString() !== decodedToken.id) {
       return res.status(401).json({
-        error: "Unauthorized access: User credentials not found!"
-      })
+        error: "Unauthorized access: User credentials not found!",
+      });
     }
-    
+
     // Remove the event ID from eventsRegisteredTo field of all users who registered for the event
     await User.updateMany(
       { eventsRegisteredTo: eventId },
       { $pull: { eventsRegisteredTo: eventId } }
-      );
-    
+    );
+
     // Remove the event ID from myCreatedEvents field of the user who created the event
     await User.updateOne(
       { _id: event.createdBy },

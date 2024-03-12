@@ -80,6 +80,17 @@
   margin-top: 20px;
 }
 
+.attendance-div {
+  display: flex;
+  align-items: center;
+}
+
+.attendance-div > p {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .location-div {
   display: flex;
   flex-direction: column;
