@@ -79,14 +79,23 @@ eventRouter.post("/register-event", async (req, res) => {
       error: "invalid user credentials",
     });
   }
-
+  
   const event = await Event.findById(eventId);
+  if(!event) {
+    return res.status(404).json({
+      error: "Event not found",
+    });
+  }
+try {
 
   event.registeredBy = event.registeredBy.concat(decodedToken.id);
   await event.save();
-
+  
   user.eventsRegisteredTo = user.eventsRegisteredTo.concat(eventId);
   await user.save();
+}catch(err) {
+  console.log(err);
+}
 
   res.status(201).json(event);
 });

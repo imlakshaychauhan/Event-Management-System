@@ -1,25 +1,40 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
-import { formatDateRange } from "../utils/helpers";
-import { getSingleEvent } from "../services/eventService"; // Add this import
+import { decodeToken, formatDateRange } from "../utils/helpers";
+import { getSingleEvent, registerEvent } from "../services/eventService"; // Add this import
 import "./styles/registerevent.css";
+
 const RegisterEvent = () => {
   const { id } = useParams();
+
   const [event, setEvent] = useState(null);
+  const [showRSVP, setShowRSVP] = useState(true);
+
+  const token = localStorage.getItem("token");
+  const decodedId = decodeToken(token).id;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await getSingleEvent(id);
         const data = res.data;
+        if (!data.registeredBy.includes(decodedId)) {
+          data.registeredBy.push(decodedId);
+          registerEvent(data.id, token);
+        }
         setEvent(data);
+        console.log(event);
       } catch (error) {
         console.error("Error fetching event data:", error);
       }
     };
     fetchData();
   }, [id]);
+
+  const deRegisterEvent = () => {
+    
+  }
 
   return (
     <div className="registerEvent">
@@ -49,7 +64,22 @@ const RegisterEvent = () => {
                 backColor={"#249329"}
                 color={"#FFFFFF"}
               />
-              <span className="rsvp-link">Edit RSVP</span>
+              {showRSVP ? (
+                <span
+                  onClick={() => setShowRSVP(!showRSVP)}
+                  className="rsvp-link"
+                >
+                  Edit RSVP
+                </span>
+              ) : (
+                <>
+                  <span>Current Status: Going</span>
+                  <div>
+                    <Button title={"Update to Not Going"} onClick={deRegisterEvent} />
+                    <span onClick={() => setShowRSVP(!showRSVP)}>Cancel</span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

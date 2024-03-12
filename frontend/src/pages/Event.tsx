@@ -4,7 +4,7 @@ import clock from "../assets/clock.png";
 import location from "../assets/location.png";
 import { useEffect, useState } from "react";
 import { getSingleEvent } from "../services/eventService";
-import { formatDateRange } from "../utils/helpers";
+import { decodeToken, formatDateRange } from "../utils/helpers";
 import "./styles/event.css";
 
 const Event = () => {

@@ -9,4 +9,13 @@ const getSingleEvent = (eventId) => {
   return axios.get(url + `/${eventId}`)
 }
 
-export { getAllEvents, getSingleEvent };
+const registerEvent = (eventId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return axios.post(url + "/register-event", {eventId}, config)
+}
+
+export { getAllEvents, getSingleEvent, registerEvent };

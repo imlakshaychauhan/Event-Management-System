@@ -12,6 +12,8 @@
 
 .input-container {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .input-container input {
@@ -51,5 +53,16 @@
 
   .eventlist > * {
     flex: 0 0 calc(50% - 20px); /* Adjust width for smaller screens */
+  }
+}
+@media (max-width: 649px) {
+  .input-container {
+    text-align: center;
+  }
+  .input-container > button {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin: 10px 40px;
   }
 }

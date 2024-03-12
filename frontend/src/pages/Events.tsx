@@ -4,6 +4,7 @@ import LoadingCard from "../components/LoadingCard";
 import "./styles/events.css";
 import { getAllEvents } from "../services/eventService";
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 
 const Events = () => {
   const liveCol = "#55BF59";
@@ -49,6 +50,7 @@ const Events = () => {
     <div className="events">
       <div className="input-container">
         <input placeholder="Search Title..." name={"searchevent"} />
+        <Button title="Create Event" backColor="#249329" color="#FFFFFF" />
       </div>
       <p className="header">Live Events</p>
       <div className="eventlist">
