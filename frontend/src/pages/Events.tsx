@@ -17,6 +17,8 @@ const Events = () => {
   const [liveEvents, setLiveEvents] = useState();
   const [upcomingEvents, setUpcomingEvents] = useState();
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllEvents();

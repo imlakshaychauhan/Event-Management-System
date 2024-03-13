@@ -6,11 +6,26 @@ import { useEffect, useState } from "react";
 import { getSingleEvent } from "../services/eventService";
 import { decodeToken, formatDateRange } from "../utils/helpers";
 import "./styles/event.css";
+import { toast } from "react-toastify";
 
 const Event = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(false);
+
+  const token = localStorage.getItem("token");
+  const decodedToken = decodeToken(token);
+
+  const successfulRegister = () => toast.success(`Registered to ${event.title} Event 😄`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"
+    });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +41,10 @@ const Event = () => {
   }, [id]);
 
   useEffect(() => {
-    if (event) setCurrentStatus(!currentStatus);
+    if(!event || !token) return;
+    const isRegistered = event.registeredBy.includes(decodedToken.id);
+    if (isRegistered)
+      setCurrentStatus(true);
   }, [event]);
 
   // Conditional rendering

@@ -8,6 +8,7 @@ import {
   registerEvent,
 } from "../services/eventService"; // Add this import
 import "./styles/registerevent.css";
+import { toast } from "react-toastify";
 
 const RegisterEvent = () => {
   const { id } = useParams();
@@ -19,6 +20,28 @@ const RegisterEvent = () => {
   const token = localStorage.getItem("token");
   const decodedId = decodeToken(token).id;
 
+  const successfulRegister = () => toast.success(`Registered Successfully!😄`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"
+    });
+
+  const successfulDeregister = () => toast.success(`Deregistered Successfully!✌🏻`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"
+    });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,6 +50,7 @@ const RegisterEvent = () => {
         if (!data.registeredBy.includes(decodedId)) {
           data.registeredBy.push(decodedId);
           await registerEvent(data.id, token);
+          successfulRegister();
         }
         setEvent(data);
         console.log(event);
@@ -39,7 +63,8 @@ const RegisterEvent = () => {
 
   const deregister = async () => {
     await deregisterEvent(event.id, token);
-    navigate("/");
+    successfulDeregister();
+    navigate(`/event/${event.id}`);
   };
 
   return (

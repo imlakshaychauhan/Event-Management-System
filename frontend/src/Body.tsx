@@ -2,6 +2,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Body = () => {
   // const navigate = useNavigate();
@@ -15,9 +17,10 @@ const Body = () => {
 
   return (
     <>
-    <Navbar />
+      <ToastContainer />
+      <Navbar />
       <Outlet />
-      </>
+    </>
   );
 };
 
