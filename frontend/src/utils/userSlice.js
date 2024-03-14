@@ -7,18 +7,18 @@ const userSlice = createSlice({
         loginError: null
     },
     reducers: {
-        setIsLoggedInTrue: (state, action) => {
+        setIsLoggedInTrue: (state) => {
             // Update isLoggedIn to true
             return { ...state, isLoggedIn: true };
         },
-        setIsLoggedInFalse: (state, action) => {
+        setIsLoggedInFalse: (state) => {
             // Update isLoggedIn to true
             return { ...state, isLoggedIn: false };
         },
         setLoginError: (state, action) => {
             return { ...state, loginError: action.payload }; // Set loginError to the payload
         },
-        clearLoginError: (state, action) => {
+        clearLoginError: (state) => {
             return { ...state, loginError: null }; // Clear loginError
         },
     }
