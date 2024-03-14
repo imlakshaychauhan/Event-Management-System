@@ -27,4 +27,13 @@ const deregisterEvent = (eventId, token) => {
   return axios.post(url + "/deregister-event", {eventId}, config)
 }
 
-export { getAllEvents, getSingleEvent, registerEvent, deregisterEvent };
+const createEvent = (formData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return axios.post(url + "/create-event", formData, config);
+}
+
+export { getAllEvents, getSingleEvent, registerEvent, deregisterEvent, createEvent };

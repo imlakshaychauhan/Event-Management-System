@@ -52,7 +52,9 @@ const Events = () => {
     <div className="events">
       <div className="input-container">
         <input placeholder="Search Title..." name={"searchevent"} />
-        <Button title="Create Event" backColor="#249329" color="#FFFFFF" />
+        <Link to="/create-event">
+          <Button title="Create Event" backColor="#249329" color="#FFFFFF" />
+        </Link>
       </div>
       <p className="header">Live Events</p>
       <div className="eventlist">

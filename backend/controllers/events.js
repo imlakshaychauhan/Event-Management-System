@@ -26,6 +26,8 @@ eventRouter.get("/:eventId", async (req, res) => {
 });
 
 eventRouter.post("/create-event", async (req, res) => {
+  console.log(req.body);
+
   const {
     title,
     description,
