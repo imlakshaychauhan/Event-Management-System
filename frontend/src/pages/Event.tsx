@@ -12,20 +12,10 @@ const Event = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(false);
+  const [isMyEvent, setIsMyEvent] = useState(false);
 
   const token = localStorage.getItem("token");
   const decodedToken = decodeToken(token);
-
-  const successfulRegister = () => toast.success(`Registered to ${event.title} Event 😄`, {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light"
-    });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,10 +31,12 @@ const Event = () => {
   }, [id]);
 
   useEffect(() => {
-    if(!event || !token) return;
+    if (!event || !token) return;
     const isRegistered = event.registeredBy.includes(decodedToken.id);
-    if (isRegistered)
-      setCurrentStatus(true);
+    if (isRegistered) setCurrentStatus(true);
+    if (event.createdBy === decodedToken.id) {
+      setIsMyEvent(true);
+    }
   }, [event]);
 
   // Conditional rendering
@@ -72,7 +64,18 @@ const Event = () => {
             </div>
           </div>
           <div className="right-div">
-            {currentStatus ? (
+            {isMyEvent ? (
+              <div className="attendance-div">
+                <p>You're Hosting!</p>
+                <Link to={`/register-event/${event.id}`}>
+                  <Button
+                    title={"Update Event"}
+                    backColor={"#6A7ACF"}
+                    color={"#FFFFFF"}
+                  />
+                </Link>
+              </div>
+            ) : currentStatus ? (
               <div className="attendance-div">
                 <p>You're Going!</p>
                 <Link to={`/register-event/${event.id}`}>
@@ -139,7 +142,7 @@ const Event = () => {
       </div>
     );
   } else {
-    return null; // Render nothing while data is being fetched
+    return null;
   }
 };
 
