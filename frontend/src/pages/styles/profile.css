@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito&family=Judson:ital,wght@0,400;0,700;1,400&display=swap");
+
+.profile-div {
+  font-family: "Judson", serif;
+  display: flex;
+}
+
+.profile-left-div {
+  padding: 30px;
+  background-color: #d9d9d9;
+  margin: 10px;
+  border-radius: 30px;
+  height: fit-content;
+}
+.profile-left-div img {
+  background-color: #ffff;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  margin-bottom: 15px;
+}
+
+.profile-center {
+  text-align: center;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+  color: #206f1e;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.email-phone {
+  font-weight: bold;
+}
+
+.email-phone span {
+  font-weight: normal;
+}
+
+.profile-right-div {
+  margin-left: 30px;
+}
+
+.tabs {
+  display: flex;
+  padding: 5px 10px;
+}
+
+.tabs p {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profile-events {
+  display: flex;
+  margin: 15px;
+  flex-wrap: wrap;
+  justify-content: left; /* Distribute items evenly with space between them */
+}
+
+.profile-event-card {
+  margin: 5px;
+}
+
+.registered-events-p,
+.created-events-p {
+  font-size: 20px;
+}
+
+.created-events-p {
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 802px) {
+  .profile-div {
+    flex-direction: column;
+    border: 1px solid red;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .profile-left-div {
+    text-align: center;
+  }
+}

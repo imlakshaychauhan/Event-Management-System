@@ -1,8 +1,15 @@
 import Button from "../components/Button";
 import EventForm from "../components/EventForm";
 import "./styles/createevent.css";
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back to the previous page
+  };
+
   return (
     <div className="create-event">
       <Button
@@ -10,7 +17,8 @@ const CreateEvent = () => {
         backColor={"#000000"}
         color={"#FFFFFF"}
         borderRadius={"10px"}
-      />
+        onClick={handleGoBack}
+        />
       <div className="form-container">
         <div className="left-container">
           <h1>Let's enter the event details below!</h1>

@@ -16,6 +16,7 @@ import store from "./utils/store";
 import { useSelector } from "react-redux";
 import RegisterEvent from "./pages/RegisterEvent";
 import CreateEvent from "./pages/CreateEvent";
+import Profile from "./pages/Profile";
 
 const AppRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const AppRouter = createBrowserRouter(
       <Route path="/event/:id" element={<Event />} />
       <Route path="/register-event/:id" element={<RegisterEventOrNavigateToLogin />} />
       <Route path="/create-event" element={<CreateEventOrNavigateToLogin />} />
+      <Route path="/profile" element={<ProfileOrNavigateToLogin />} />
     </Route>
   )
 );
@@ -58,6 +60,11 @@ function RegisterEventOrNavigateToLogin() {
 function CreateEventOrNavigateToLogin() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   return isLoggedIn ? <CreateEvent /> : <Navigate to="/login" replace />;
+}
+
+function ProfileOrNavigateToLogin() {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  return isLoggedIn ? <Profile /> : <Navigate to="/login" replace />;
 }
 
 export default App;

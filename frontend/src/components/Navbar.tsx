@@ -52,7 +52,9 @@ const Navbar = () => {
       <div className="last-navbar">
         {isLoggedIn ? (
           <>
+            <Link to="/profile">
             <Button title={"Profile"} backColor={"#C1F0C3"} color={"#0E3F09"} />
+            </Link>
             <Button
               title={"Logout"}
               backColor={"black"}

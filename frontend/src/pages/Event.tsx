@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import clock from "../assets/clock.png";
 import location from "../assets/location.png";
@@ -16,6 +16,13 @@ const Event = () => {
 
   const token = localStorage.getItem("token");
   const decodedToken = decodeToken(token);
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back to the previous page
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,14 +51,13 @@ const Event = () => {
     return (
       <div>
         <div className="event-btn">
-          <Link to="/events">
             <Button
-              title={"Back to Events"}
+              title={"Go Back"}
               backColor={"#000000"}
               color={"#FFFFFF"}
               borderRadius={"8px"}
+              onClick={handleGoBack}
             />
-          </Link>
         </div>
         <div className="m-container">
           <div className="left-div">
@@ -67,7 +73,7 @@ const Event = () => {
             {isMyEvent ? (
               <div className="attendance-div">
                 <p>You're Hosting!</p>
-                <Link to={`/register-event/${event.id}`}>
+                <Link to={`/`}>
                   <Button
                     title={"Update Event"}
                     backColor={"#6A7ACF"}

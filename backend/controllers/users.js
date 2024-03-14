@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
 usersRouter.get("/", async (req, res) => {
-  const users = await User.find({})
-    // .populate("myCreatedEvents")
-    // .populate("eventsRegisteredTo");
+  const users = await User.find({});
+  // .populate("myCreatedEvents")
+  // .populate("eventsRegisteredTo");
   res.json(users);
 });
 
@@ -37,21 +37,24 @@ usersRouter.post("/register", async (req, res) => {
   res.status(201).json({
     name: user.name,
     username: user.username,
-    token
+    token,
   });
 });
 
-usersRouter.get("/:username", async(req, res) => {
-  const {username} = req.params;
-  const user = await User.findOne({username});
+usersRouter.get("/:username", async (req, res) => {
+  const { username } = req.params;
 
-  if(!user) {
+  const user = await User.findOne({ username })
+    .populate("myCreatedEvents")
+    .populate("eventsRegisteredTo");
+
+  if (!user) {
     return res.status(401).json({
-      error: "user not found!"
-    })
+      error: "user not found!",
+    });
   }
-  
+
   res.status(200).json(user);
-})
+});
 
 module.exports = usersRouter;
