@@ -69,8 +69,8 @@ const Events = () => {
                 </Link>
               );
             })
-          : null}
-        <LoadingCard color={liveCol} />
+          : <p>There are no live events</p>}
+        {/* <LoadingCard color={liveCol} /> */}
       </div>
       <div className="lines"></div>
       <p className="header">Upcoming Events</p>
@@ -86,8 +86,8 @@ const Events = () => {
                 </Link>
               );
             })
-          : null}
-        <LoadingCard color={upcomingCol} />
+          : <p>There are no upcoming events</p>}
+        {/* <LoadingCard color={upcomingCol} /> */}
       </div>
 
       <div className="lines"></div>
@@ -104,8 +104,8 @@ const Events = () => {
                 </Link>
               );
             })
-          : null}
-        <LoadingCard color={pastCol} />
+          : <p>There are no past events</p>}
+        {/* <LoadingCard color={pastCol} /> */}
       </div>
     </div>
   );
