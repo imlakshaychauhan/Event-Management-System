@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3001/api/events";
+const url = "https://event-management-system-ptoj.onrender.com/api/events";
 
 const getAllEvents = () => {
   return axios.get(url);

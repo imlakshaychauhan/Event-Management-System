@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3001/api/users";
+const url = "https://event-management-system-ptoj.onrender.com/api/users";
 
 const getAllUsers = () => {
     return axios.get(url);
