@@ -56,13 +56,9 @@ const EventForm = () => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     await createEvent(formData, token);
-    // const data = res.data;
     successfulEventCreation();
     navigate("/events");
-    // console.log(data);
   };
-
-
 
   return (
     <form className="form" onSubmit={handleSubmit}>

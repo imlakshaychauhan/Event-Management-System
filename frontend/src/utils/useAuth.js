@@ -8,10 +8,33 @@ import {
   setLoginError,
 } from "./userSlice";
 import { registerUser } from "../services/userService";
+import {toast} from "react-toastify";
 
 const useAuth = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  const logoutToast = () => toast.success(`👋🏻You've been logged out!`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"
+    });
+
+  const loginToast = () => toast.success(`👋🏻 You've been logged in!`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"
+    });
 
   useEffect(() => {
     // Check token expiration only when the user is logged in
@@ -49,6 +72,7 @@ const useAuth = () => {
       const token = response.data.token;
       localStorage.setItem("token", token);
       dispatch(setIsLoggedInTrue());
+      loginToast();
     } catch (error) {
       console.error("Login failed:", error);
       dispatch(setLoginError("Incorrect username or password")); // Set login error message
@@ -61,6 +85,7 @@ const useAuth = () => {
       const token = res.data.token;
       localStorage.setItem("token", token);
       dispatch(setIsLoggedInTrue());
+      loginToast();
     } catch (err) {
       console.error("Signup failed:", err);
       dispatch(setLoginError("Incorrect Credentials!")); // Set signup error message
@@ -69,6 +94,7 @@ const useAuth = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    logoutToast();
     dispatch(setIsLoggedInFalse());
   };
 

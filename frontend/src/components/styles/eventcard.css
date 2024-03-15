@@ -2,8 +2,8 @@
     /* background-color: black; */
     color: white;
     width: 300px;
-    height: 220px;
-    padding: 10px;
+    height: fit-content;
+    padding: 5px;
     display: flex;
     direction: row;
     border-radius: 20px;

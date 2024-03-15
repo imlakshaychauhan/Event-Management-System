@@ -17,8 +17,6 @@ const Events = () => {
   const [liveEvents, setLiveEvents] = useState();
   const [upcomingEvents, setUpcomingEvents] = useState();
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllEvents();
@@ -65,7 +63,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} />
+                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               );
             })
@@ -82,7 +80,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} />{" "}
+                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               );
             })
@@ -100,7 +98,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} />{" "}
+                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               );
             })

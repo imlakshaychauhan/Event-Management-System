@@ -86,7 +86,7 @@ const Profile = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} />
+                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               </div>
             ))
@@ -99,7 +99,7 @@ const Profile = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} />
+                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               </div>
             ))

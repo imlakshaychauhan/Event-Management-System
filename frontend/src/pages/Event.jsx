@@ -73,7 +73,7 @@ const Event = () => {
             {isMyEvent ? (
               <div className="attendance-div">
                 <p>You're Hosting!</p>
-                <Link to={`/`}>
+                <Link to={`/update-event/${event.id}`}>
                   <Button
                     title={"Update Event"}
                     backColor={"#6A7ACF"}
