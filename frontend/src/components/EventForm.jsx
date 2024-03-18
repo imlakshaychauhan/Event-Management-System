@@ -136,6 +136,13 @@ const EventForm = () => {
         onChange={handleChange}
         required
       />
+      <input
+        name="imgTheme"
+        value={formData.imgTheme}
+        type="text"
+        placeholder="Enter Image Link.."
+        onChange={handleChange}
+      />
       <Button
         type={"submit"}
         title={"Create Event"}

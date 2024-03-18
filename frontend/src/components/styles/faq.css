@@ -1,0 +1,9 @@
+.question {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.answer {
+    font-size: 19px;
+}

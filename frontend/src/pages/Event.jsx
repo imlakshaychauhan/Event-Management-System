@@ -6,13 +6,23 @@ import { useEffect, useState } from "react";
 import { getSingleEvent } from "../services/eventService";
 import { decodeToken, formatDateRange } from "../utils/helpers";
 import "./styles/event.css";
-import { toast } from "react-toastify";
+import { updateEvent } from "../services/eventService";
+import upArrow from "../assets/up-arrow.png";
+import downArrow from "../assets/down-arrow.png";
+import Faq from "../components/Faq";
 
 const Event = () => {
   const { id } = useParams();
+
   const [event, setEvent] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(false);
   const [isMyEvent, setIsMyEvent] = useState(false);
+  const [imgDetails, setImgDetails] = useState({
+    name: "",
+    url: "",
+  });
+  const [showImages, setShowImages] = useState(true);
+  const [showFaq, setShowFaq] = useState(true);
 
   const token = localStorage.getItem("token");
   const decodedToken = decodeToken(token);
@@ -23,17 +33,30 @@ const Event = () => {
     navigate(-1); // Navigates back to the previous page
   };
 
+  const fetchData = async () => {
+    try {
+      const res = await getSingleEvent(id);
+      const data = res.data;
+      setEvent(data);
+    } catch (error) {
+      console.error("Error fetching event data:", error);
+    }
+  };
+
+  const handleAddImage = async () => {
+    const tempEvent = {
+      ...event,
+      eventImages: [...event.eventImages, imgDetails],
+    };
+    await updateEvent(tempEvent, token);
+    setEvent((prevEvent) => ({
+      ...prevEvent,
+      eventImages: [...prevEvent.eventImages, imgDetails],
+    }));
+    setImgDetails({ name: "", url: "" });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getSingleEvent(id);
-        const data = res.data;
-        setEvent(data);
-      } catch (error) {
-        console.error("Error fetching event data:", error);
-      }
-    };
     fetchData();
   }, [id]);
 
@@ -51,13 +74,13 @@ const Event = () => {
     return (
       <div>
         <div className="event-btn">
-            <Button
-              title={"Go Back"}
-              backColor={"#000000"}
-              color={"#FFFFFF"}
-              borderRadius={"8px"}
-              onClick={handleGoBack}
-            />
+          <Button
+            title={"Go Back"}
+            backColor={"#000000"}
+            color={"#FFFFFF"}
+            borderRadius={"8px"}
+            onClick={handleGoBack}
+          />
         </div>
         <div className="m-container">
           <div className="left-div">
@@ -132,9 +155,42 @@ const Event = () => {
         <div className="lines"></div>
         <div className="event-photos-container">
           {event.eventImages && event.eventImages.length > 0 && (
-            <h1>Event Photos</h1>
+            <div className="event-photos-title-container">
+              <h1>Event Photos</h1>
+              {showImages && (
+                <img src={upArrow} onClick={() => setShowImages(false)} />
+              )}
+              {!showImages && (
+                <img src={downArrow} onClick={() => setShowImages(true)} />
+              )}
+            </div>
           )}
-          {event.eventImages && event.eventImages.length > 0
+          {isMyEvent ? (
+            <div className="add-new-image" style={{ textAlign: "center" }}>
+              <input
+                value={imgDetails.name}
+                onChange={(e) =>
+                  setImgDetails({ ...imgDetails, name: e.target.value })
+                }
+                placeholder="Enter the description for image"
+              />
+              <input
+                value={imgDetails.url}
+                onChange={(e) =>
+                  setImgDetails({ ...imgDetails, url: e.target.value })
+                }
+                placeholder="Enter Image Link to add event image"
+              />
+              <Button
+                title={"Add Image"}
+                backColor={"#000000"}
+                color={"#FFFFFF"}
+                onClick={handleAddImage}
+              />
+            </div>
+          ) : null}
+
+          {showImages && event.eventImages && event.eventImages.length > 0
             ? event.eventImages.map((image, index) => (
                 <div key={index} className="gallery">
                   {image.url && (
@@ -144,6 +200,22 @@ const Event = () => {
                 </div>
               ))
             : null}
+        </div>
+        <div className="lines"></div>
+        <div className="event-photos-container">
+          {event.eventImages && event.eventImages.length > 0 && (
+            <div className="event-photos-title-container">
+              <h1>Frequently Asked Questions</h1>
+              {showFaq && (
+                <img src={upArrow} onClick={() => setShowFaq(false)} />
+              )}
+              {!showFaq && (
+                <img src={downArrow} onClick={() => setShowFaq(true)} />
+              )}
+            </div>
+          )}
+
+          {showFaq ? <Faq event={event} /> : null}
         </div>
       </div>
     );

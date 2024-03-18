@@ -22,6 +22,7 @@ import UpdateEvent from "./pages/UpdateEvent";
 const AppRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Body />}>
+      <Route path="*" element={<Homepage />} />
       <Route path="/" element={<Homepage />} />
       <Route path="/signup" element={<SignupOrNavigateToHomepage />} />
       <Route path="/login" element={<LoginOrNavigateToHomepage />} />

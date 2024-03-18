@@ -119,3 +119,26 @@
     margin-top: 20px;
   }
 }
+
+
+.add-new-image input {
+  width: 300px
+}
+
+.event-photos-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 100px;
+}
+.event-photos-title-container img {
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+  .event-photos-title-container {
+    margin-right: 0px;
+  }
+}
