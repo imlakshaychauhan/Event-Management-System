@@ -58,6 +58,7 @@ const Login = () => {
               value={formData.password}
               onChange={handleInputChange}
             />
+            <p className="demo-p" onClick={() => setFormData({username: "lakshaychauhan", password: "12345678"})}>Click here to Fill Demo Account Details</p>
             <Button
               type={"submit"}
               title={"Login"}

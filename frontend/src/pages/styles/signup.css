@@ -82,10 +82,11 @@ input {
   color: #474747;
 }
 
-.second-sp {
+.second-sp, .demo-p {
   color: #249329;
   text-decoration: underline;
   margin-left: 3px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 930px) {

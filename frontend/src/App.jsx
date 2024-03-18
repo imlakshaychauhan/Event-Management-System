@@ -28,7 +28,7 @@ const AppRouter = createBrowserRouter(
       <Route path="/signup" element={<SignupOrNavigateToHomepage />} />
       <Route path="/login" element={<LoginOrNavigateToHomepage />} />
       <Route path="/events" element={<Events />} />
-      <Route path="/event/:id" element={<Event />} />
+      <Route path="/event/:id" element={<EventOrNavigateToLogin />} />
       <Route path="/register-event/:id" element={<RegisterEventOrNavigateToLogin />} />
       <Route path="/create-event" element={<CreateEventOrNavigateToLogin />} />
       <Route path="/profile" element={<ProfileOrNavigateToLogin />} />
@@ -75,6 +75,11 @@ function ProfileOrNavigateToLogin() {
 function UpdateEventOrNavigateToLogin() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   return isLoggedIn ? <UpdateEvent /> : <Navigate to="/login" replace />;
+}
+
+function EventOrNavigateToLogin() {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  return isLoggedIn ? <Event /> : <Navigate to="/login" replace />;
 }
 
 export default App;

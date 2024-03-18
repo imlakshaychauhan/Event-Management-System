@@ -79,7 +79,12 @@ const Event = () => {
 
   useEffect(() => {
     if (!event || !token) return;
-    const add = event.location.address + " " + event.location.city + " " + event.location.country;
+    const add =
+      event.location.address +
+      " " +
+      event.location.city +
+      " " +
+      event.location.country;
     getLocation(add);
     const isRegistered = event.registeredBy.includes(decodedToken.id);
     if (isRegistered) setCurrentStatus(true);
