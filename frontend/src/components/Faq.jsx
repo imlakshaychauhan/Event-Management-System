@@ -3,7 +3,6 @@ import "./styles/faq.css"
 import { formatDate } from '../utils/helpers';
 
 const Faq = ({event}) => {
-    console.log(event);
   return (
     <div className='faq-container'>
         <div className='faq'>

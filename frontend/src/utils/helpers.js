@@ -39,4 +39,17 @@ const decodeToken = (token) => {
     return formattedDate;
   }
 
-export {decodeToken, formatDateRange, formatDate};
+  function formatAddressToURL(address) {
+    // Replace spaces with '+' and encode URI components
+    const formattedAddress = encodeURIComponent(address.trim().replace(/\s+/g, '+'));
+    
+    // Replace spaces with '%20' for the key
+    const apiKey = '85092f91633444e9a63604fb8fa781a9';
+
+    // Construct the API URL
+    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${formattedAddress}&key=${apiKey}`;
+    
+    return apiUrl;
+}
+
+export {decodeToken, formatDateRange, formatDate, formatAddressToURL};

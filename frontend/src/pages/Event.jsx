@@ -10,6 +10,9 @@ import { updateEvent } from "../services/eventService";
 import upArrow from "../assets/up-arrow.png";
 import downArrow from "../assets/down-arrow.png";
 import Faq from "../components/Faq";
+import Map from "../components/Map";
+import { formatAddressToURL } from "../utils/helpers";
+import axios from "axios";
 
 const Event = () => {
   const { id } = useParams();
@@ -23,6 +26,8 @@ const Event = () => {
   });
   const [showImages, setShowImages] = useState(true);
   const [showFaq, setShowFaq] = useState(true);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
 
   const token = localStorage.getItem("token");
   const decodedToken = decodeToken(token);
@@ -56,12 +61,26 @@ const Event = () => {
     setImgDetails({ name: "", url: "" });
   };
 
+  const getLocation = async (address) => {
+    const apiUrl = formatAddressToURL(address);
+    await axios
+      .get(apiUrl)
+      .then((res) => res.data)
+      .then((data) => data?.results[0]?.geometry)
+      .then((coords) => {
+        setLat(coords.lat);
+        setLng(coords.lng);
+      });
+  };
+
   useEffect(() => {
     fetchData();
   }, [id]);
 
   useEffect(() => {
     if (!event || !token) return;
+    const add = event.location.address + " " + event.location.city + " " + event.location.country;
+    getLocation(add);
     const isRegistered = event.registeredBy.includes(decodedToken.id);
     if (isRegistered) setCurrentStatus(true);
     if (event.createdBy === decodedToken.id) {
@@ -148,7 +167,9 @@ const Event = () => {
                 </div>
               </div>
             </div>
-            <div className="map"></div>
+            <div className="map">
+              {lat !== null && lng !== null && <Map lat={lat} lng={lng} />}
+            </div>
           </div>
         </div>
 

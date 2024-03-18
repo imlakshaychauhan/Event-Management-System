@@ -18,6 +18,7 @@ import RegisterEvent from "./pages/RegisterEvent";
 import CreateEvent from "./pages/CreateEvent";
 import Profile from "./pages/Profile";
 import UpdateEvent from "./pages/UpdateEvent";
+import About from "./pages/About";
 
 const AppRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const AppRouter = createBrowserRouter(
       <Route path="/create-event" element={<CreateEventOrNavigateToLogin />} />
       <Route path="/profile" element={<ProfileOrNavigateToLogin />} />
       <Route path="/update-event/:id" element={<UpdateEventOrNavigateToLogin />} />
+      <Route path="/about" element={<About />} />
     </Route>
   )
 );

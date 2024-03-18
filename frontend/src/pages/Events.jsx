@@ -63,7 +63,7 @@ const Events = () => {
                   to={`/event/${event.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <EventCard title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
+                  <EventCard key={event.id} title={event.title} backImg={event.imgTheme} date={event.startDate} startTime={event.startTime} endTime={event.endTime} />
                 </Link>
               );
             })
